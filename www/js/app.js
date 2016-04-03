@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
-.constant('API_URL', 'http://localhost:8100')
+.constant('API_URL', 'http://10.0.0.122:3000')
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
