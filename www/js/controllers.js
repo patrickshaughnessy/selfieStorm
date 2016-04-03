@@ -1,7 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $cordovaCamera) {
+.controller('DashCtrl', function($scope, $cordovaCamera, selfieService) {
 
+  $scope.newPhoto = {
+    image: 'some string'
+  };
 
   $scope.takePhoto = function(){
     console.log('take a selfie');
@@ -14,8 +17,8 @@ angular.module('starter.controllers', [])
         sourceType: Camera.PictureSourceType.CAMERA,
         allowEdit: true,
         encodingType: Camera.EncodingType.JPEG,
-        targetWidth: 100,
-        targetHeight: 100,
+        targetWidth: 200,
+        targetHeight: 200,
         popoverOptions: CameraPopoverOptions,
         saveToPhotoAlbum: false,
   	    correctOrientation:true
@@ -25,7 +28,7 @@ angular.module('starter.controllers', [])
         // var image = document.getElementById('myImage');
         // image.src = "data:image/jpeg;base64," + imageData;
 
-        $scope.image = "data:image/jpeg;base64," + imageData;
+        $scope.newPhoto.image = "data:image/jpeg;base64," + imageData;
 
       }, function(err) {
         // error
@@ -33,6 +36,15 @@ angular.module('starter.controllers', [])
 
     }, false);
 
+  }
+
+  $scope.savePhoto = function(){
+    console.log($scope.newPhoto);
+
+    selfieService.savePhoto($scope.newPhoto).then(function(data){
+      console.log('photo was saved', data);
+      // redirect to gallery
+    })
   }
 
 })

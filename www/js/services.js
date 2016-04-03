@@ -1,5 +1,35 @@
 angular.module('starter.services', [])
 
+.factory('selfieService', function($http, $q){
+
+  function savePhoto(photo){
+    console.log('1 in service, photo received', photo);
+
+    var deferred = $q.defer();
+
+    $http
+    .post('/api/photos', photo)
+    .then(function(data){
+
+      console.log('2 in service, photo saved', data);
+
+      deferred.resolve(data);
+    }, function(err){
+      deferred.reject(err);
+    });
+
+    console.log('3 in service, before returning promise', deferred);
+
+    return deferred.promise;
+
+  }
+
+  return {
+    savePhoto: savePhoto
+  }
+})
+
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
