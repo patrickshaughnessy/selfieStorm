@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('selfieService', function($http, $q){
+.factory('selfieService', function($http, $q, API_URL){
 
   function savePhoto(photo){
     console.log('1 in service, photo received', photo);
@@ -8,7 +8,7 @@ angular.module('starter.services', [])
     var deferred = $q.defer();
 
     $http
-    .post('/api/photos', photo)
+    .post(API_URL + '/api/photos', photo)
     .then(function(data){
 
       console.log('2 in service, photo saved', data);
